@@ -1,18 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace ESGI.DesignPattern.Projet
 {
-    public class UserSession
+    public interface UserSession
     {
-        private static readonly UserSession userSession = new UserSession();
-
-        private UserSession() { }
-
-        public static UserSession GetInstance()
-        {
-            return userSession;
-        }
 
         public bool IsUserLoggedIn(User user)
         {
@@ -27,10 +18,52 @@ namespace ESGI.DesignPattern.Projet
         }
     }
 
+    public class UserSessionImproved : UserSession
+    {
+        User user;
+
+        private static readonly UserSessionImproved userSession = new UserSessionImproved();
+
+        private UserSessionImproved() { }
+
+        public static UserSessionImproved GetInstance()
+        {
+            return userSession;
+        }
+
+        public bool IsUserLoggedIn(User user)
+        {
+            if (user.Equals(this.user))
+                return true;
+            return false;
+        }
+
+        public User GetLoggedUser()
+        {
+            return user;
+        }
+
+        public void Connect(User user)
+        {
+            this.user = user;
+        }
+
+        public void Diconnect(User user)
+        {
+            this.user = null;
+        }
+    }
+
     public class User
     {
-        private List<Trip> trips = new List<Trip>();
-        private List<User> friends = new List<User>();
+        public List<Trip> trips { get; }
+        public List<User> friends { get; }
+
+        public User()
+        {
+            trips = new List<Trip>();
+            friends = new List<User>();
+        }
 
         public List<User> GetFriends()
         {

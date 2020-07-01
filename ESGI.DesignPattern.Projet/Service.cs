@@ -4,18 +4,27 @@ using System.Text;
 
 namespace ESGI.DesignPattern.Projet
 {
-    public class Service
+    public sealed class Service
     {
-        public List<Trip> GetTripsByUser(User user)
+        private static readonly Lazy<Service> lazy =
+            new Lazy<Service>(() => new Service());
+
+        public static Service Instance { get { return lazy.Value; } }
+
+        private Service()
+        {
+        }
+
+        public List<Trip> GetTripsByUser(User friend)
         {
             List<Trip> tripList = new List<Trip>();
-            User loggedUser = UserSession.GetInstance().GetLoggedUser();
-            bool isFriend = false;
-            if (loggedUser != null)
+            User userLogged = UserSessionImproved.GetInstance().GetLoggedUser();
+            if(userLogged != null)
             {
-                foreach (User friend in user.GetFriends())
+                bool isFriend = false;
+                foreach (User user in friend.GetFriends())
                 {
-                    if (friend.Equals(loggedUser))
+                    if (user.Equals(userLogged))
                     {
                         isFriend = true;
                         break;
@@ -23,7 +32,7 @@ namespace ESGI.DesignPattern.Projet
                 }
                 if (isFriend)
                 {
-                    tripList = DAO.FindTripsByUser(user);
+                    tripList = friend.Trips();
                 }
                 return tripList;
             }

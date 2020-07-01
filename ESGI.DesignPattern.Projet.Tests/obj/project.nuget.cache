@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NpJ6LzrJfl0cG9/qyb/WDgVZDVKkJQ+c202GUiBACMZlijHL3jcbjaMfehL1ARlHdRpdsOfV6Iv/Cpa+/hHm6g==",
+  "dgSpecHash": "FEV4ltNU8Jpo/HiT4krScQ1aRtWYucCVkJaA+it+KKPrvF/bQZt+jMT5hQ14DYfzW2nK0g6HA7S1gJzmNS1k5w==",
   "success": true,
   "projectFilePath": "D:\\Cours\\ESGI\\4AL\\S2\\C#\\Projet\\ESGI.DesignPattern.Projet\\ESGI.DesignPattern.Projet.Tests\\ESGI.DesignPattern.Projet.Tests.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\Gourdon\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.6.1\\microsoft.testplatform.objectmodel.16.6.1.nupkg.sha512",
     "C:\\Users\\Gourdon\\.nuget\\packages\\microsoft.testplatform.testhost\\16.6.1\\microsoft.testplatform.testhost.16.6.1.nupkg.sha512",
     "C:\\Users\\Gourdon\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\Gourdon\\.nuget\\packages\\mstest.testframework\\2.1.2\\mstest.testframework.2.1.2.nupkg.sha512",
     "C:\\Users\\Gourdon\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\Gourdon\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
     "C:\\Users\\Gourdon\\.nuget\\packages\\nuget.frameworks\\5.0.0\\nuget.frameworks.5.0.0.nupkg.sha512",
