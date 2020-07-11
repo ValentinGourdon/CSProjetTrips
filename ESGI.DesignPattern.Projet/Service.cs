@@ -18,11 +18,11 @@ namespace ESGI.DesignPattern.Projet
         public List<Trip> GetTripsByUser(User friend)
         {
             List<Trip> tripList = new List<Trip>();
-            User userLogged = UserSessionImproved.GetInstance().GetLoggedUser();
+            User userLogged = UserSessionImproved.GetInstance().user;
             if(userLogged != null)
             {
                 bool isFriend = false;
-                foreach (User user in friend.GetFriends())
+                foreach (User user in friend.friends)
                 {
                     if (user.Equals(userLogged))
                     {
@@ -32,7 +32,7 @@ namespace ESGI.DesignPattern.Projet
                 }
                 if (isFriend)
                 {
-                    tripList = friend.Trips();
+                    tripList = friend.trips;
                 }
                 return tripList;
             }

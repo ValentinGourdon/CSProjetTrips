@@ -20,7 +20,7 @@ namespace ESGI.DesignPattern.Projet
 
     public class UserSessionImproved : UserSession
     {
-        User user;
+        public User user { get; set; }
 
         private static readonly UserSessionImproved userSession = new UserSessionImproved();
 
@@ -36,11 +36,6 @@ namespace ESGI.DesignPattern.Projet
             if (user.Equals(this.user))
                 return true;
             return false;
-        }
-
-        public User GetLoggedUser()
-        {
-            return user;
         }
 
         public void Connect(User user)
@@ -65,11 +60,6 @@ namespace ESGI.DesignPattern.Projet
             friends = new List<User>();
         }
 
-        public List<User> GetFriends()
-        {
-            return friends;
-        }
-
         public void AddFriend(User user)
         {
             friends.Add(user);
@@ -78,11 +68,6 @@ namespace ESGI.DesignPattern.Projet
         public void AddTrip(Trip trip)
         {
             trips.Add(trip);
-        }
-
-        public List<Trip> Trips()
-        {
-            return trips;
         }
     }
 }
