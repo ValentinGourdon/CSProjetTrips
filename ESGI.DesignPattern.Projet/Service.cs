@@ -18,7 +18,7 @@ namespace ESGI.DesignPattern.Projet
         public List<Trip> GetTripsByUser(User friend)
         {
             List<Trip> tripList = new List<Trip>();
-            User userLogged = UserSessionImproved.GetInstance().user;
+            User userLogged = UserSessionConnection.GetInstance().user;
             if(userLogged != null)
             {
                 bool isFriend = false;

@@ -5,28 +5,34 @@ namespace ESGI.DesignPattern.Projet.Tests
 {
     public class Tests
     {
-        [Fact]
-        public void ServiceTestNotNull()
+        User user;
+        public Tests()
         {
-            User user = new User();
-            UserSessionImproved.GetInstance().Connect(user);
+            user = new User();
+        }
+
+        [Fact]
+        public void ServiceTestNullWithoutConnection()
+        {
+            UserSessionConnection.GetInstance().Connect(user);
+            UserSessionConnection.GetInstance().Disconnect(user);
+            Assert.Throws<UserNotLoggedInException>(() => Service.Instance.GetTripsByUser(user));
+        }
+
+        [Fact]
+        public void ServiceTestNotNullAfterConnexion()
+        {
+            UserSessionConnection.GetInstance().Connect(user);
 
             List<Trip> trips = Service.Instance.GetTripsByUser(user);
             Assert.NotNull(trips);
         }
 
-        [Fact]
-        public void ServiceTestNull()
-        {
-            User user = new User();
-            Assert.Throws<UserNotLoggedInException>(() => Service.Instance.GetTripsByUser(user));
-        }
 
         [Fact]
         public void ServiceTestTripsNotEmpty()
         {
-            User user = new User();
-            UserSessionImproved.GetInstance().Connect(user);
+            UserSessionConnection.GetInstance().Connect(user);
 
             User friend = new User();
             friend.AddTrip(new Trip());
@@ -36,6 +42,22 @@ namespace ESGI.DesignPattern.Projet.Tests
             List<Trip> trips = Service.Instance.GetTripsByUser(friend);
 
             Assert.Equal(2, trips.Count);
+        }
+
+        [Fact]
+        public void ServiceTestNullAfterDisconnection()
+        {
+            UserSessionConnection.GetInstance().Connect(user);
+
+            User friend = new User();
+            friend.AddTrip(new Trip());
+            friend.AddTrip(new Trip());
+            friend.AddFriend(user);
+
+            List<Trip> trips = Service.Instance.GetTripsByUser(friend);
+
+            UserSessionConnection.GetInstance().Disconnect(user);
+            Assert.Throws<UserNotLoggedInException>(() => Service.Instance.GetTripsByUser(user));
         }
     }
 }

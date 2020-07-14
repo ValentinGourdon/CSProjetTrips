@@ -18,15 +18,15 @@ namespace ESGI.DesignPattern.Projet
         }
     }
 
-    public class UserSessionImproved : UserSession
+    public class UserSessionConnection : UserSession
     {
         public User user { get; set; }
 
-        private static readonly UserSessionImproved userSession = new UserSessionImproved();
+        private static readonly UserSessionConnection userSession = new UserSessionConnection();
 
-        private UserSessionImproved() { }
+        private UserSessionConnection() { }
 
-        public static UserSessionImproved GetInstance()
+        public static UserSessionConnection GetInstance()
         {
             return userSession;
         }
@@ -43,7 +43,7 @@ namespace ESGI.DesignPattern.Projet
             this.user = user;
         }
 
-        public void Diconnect(User user)
+        public void Disconnect(User user)
         {
             this.user = null;
         }
