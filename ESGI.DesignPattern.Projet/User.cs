@@ -1,18 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace ESGI.DesignPattern.Projet
 {
-    public class UserSession
+    public interface UserSession
     {
-        private static readonly UserSession userSession = new UserSession();
-
-        private UserSession() { }
-
-        public static UserSession GetInstance()
-        {
-            return userSession;
-        }
 
         public bool IsUserLoggedIn(User user)
         {
@@ -27,14 +18,46 @@ namespace ESGI.DesignPattern.Projet
         }
     }
 
+    public class UserSessionConnection : UserSession
+    {
+        public User user { get; set; }
+
+        private static readonly UserSessionConnection userSession = new UserSessionConnection();
+
+        private UserSessionConnection() { }
+
+        public static UserSessionConnection GetInstance()
+        {
+            return userSession;
+        }
+
+        public bool IsUserLoggedIn(User user)
+        {
+            if (user.Equals(this.user))
+                return true;
+            return false;
+        }
+
+        public void Connect(User user)
+        {
+            this.user = user;
+        }
+
+        public void Disconnect(User user)
+        {
+            this.user = null;
+        }
+    }
+
     public class User
     {
-        private List<Trip> trips = new List<Trip>();
-        private List<User> friends = new List<User>();
+        public List<Trip> trips { get; }
+        public List<User> friends { get; }
 
-        public List<User> GetFriends()
+        public User()
         {
-            return friends;
+            trips = new List<Trip>();
+            friends = new List<User>();
         }
 
         public void AddFriend(User user)
@@ -45,11 +68,6 @@ namespace ESGI.DesignPattern.Projet
         public void AddTrip(Trip trip)
         {
             trips.Add(trip);
-        }
-
-        public List<Trip> Trips()
-        {
-            return trips;
         }
     }
 }
